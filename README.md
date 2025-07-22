@@ -24,12 +24,12 @@ This is a simple Bash script that uses `xrandr` to adjust screen brightness on L
 ## Installation
 1. Clone or download the repository:
    ```
-   git clone https://github.com/yourusername/laptop-screen-dimmer.git
+   git clone https://github.com/bladeofzion/dimmer.git
    cd laptop-screen-dimmer
    ```
 2. Make the script executable:
    ```
-   chmod +x screen-dimmer.sh  # Rename if needed
+   chmod +x dimmer  # Rename if needed
    ```
 3. Install dependencies if missing (script will check and prompt):
    ```
