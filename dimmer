@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Source your bashrc or profile
+source ~/.profile
+
+export LC_ALL=en_US.UTF-8  # Ensure proper handling of multibyte characters
+
+# Dependency check 
+dependencies=("xrandr" "cut")
+
+missing=()  # Array to store missing dependencies
+
+for dep in "${dependencies[@]}"; do
+    if ! command -v "$dep" &>/dev/null; then
+        missing+=("$dep")
+    fi
+done
+
+if [ "${#missing[@]}" -ne 0 ]; then
+    echo "Error: The following dependencies are missing:"
+    for dep in "${missing[@]}"; do
+        echo "  sudo apt install $dep"
+    done
+    echo "Please install them."
+    exit 1
+else
+    echo "All dependencies are installed."
+fi
+
+# Check if the required arguments are provided
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <brightness float value between 0.0  1.0>"
+  exit 1
+fi
+
+BRIGHTNESS=$1
+
+$(xrandr --output $(xrandr | grep " connected" | cut -f1 -d " ") --brightness $BRIGHTNESS)
+
